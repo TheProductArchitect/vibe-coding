@@ -76,7 +76,7 @@ const LearningCard: React.FC<{ item: LearningItem }> = ({ item }) => {
 
               {/* How it works */}
               <div>
-                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 flex items-center gap-2">
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 flex items-center gap-2">
                   <Settings className="w-3 h-3" /> How it works
                 </div>
                 <p className="text-sm text-gray-300 leading-relaxed">
@@ -85,7 +85,7 @@ const LearningCard: React.FC<{ item: LearningItem }> = ({ item }) => {
               </div>
 
               {/* Analogy */}
-              <div className="bg-white/5 rounded-lg p-3 border-l-2 border-brand-primary">
+              <div className="bg-[#111] rounded-lg p-3 border-l-2 border-brand-primary">
                 <div className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-1 flex items-center gap-2">
                   <Sparkles className="w-3 h-3" /> The Analogy
                 </div>
@@ -96,7 +96,7 @@ const LearningCard: React.FC<{ item: LearningItem }> = ({ item }) => {
 
               {/* Vibe Tip */}
               <div>
-                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1 flex items-center gap-2">
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 flex items-center gap-2">
                   <Zap className="w-3 h-3" /> Vibe Coder Tip
                 </div>
                 <p className="text-sm text-gray-300 leading-relaxed">
@@ -131,7 +131,7 @@ const ScenarioCard: React.FC<{ scenario: Scenario, selectedTool: ToolType }> = (
 
   return (
     <div
-      className="bg-black/40 border border-white/10 rounded-xl p-6 hover:border-brand-primary/30 transition-colors flex flex-col cursor-pointer group"
+      className="bg-[#0a0a0a] border border-white/10 rounded-xl p-6 hover:border-brand-primary/30 transition-colors flex flex-col cursor-pointer group"
       onClick={() => setIsExpanded(!isExpanded)}
     >
       <div className="flex items-start justify-between gap-3 mb-4">
@@ -145,7 +145,7 @@ const ScenarioCard: React.FC<{ scenario: Scenario, selectedTool: ToolType }> = (
       </div>
       <p className="text-gray-400 text-sm mb-6 min-h-[3rem]">{scenario.desc}</p>
 
-      <div className="mt-auto bg-white/5 rounded p-4 border-l-2 border-brand-primary animate-fade-in mb-1">
+      <div className="mt-auto bg-[#111] rounded p-4 border-l-2 border-brand-primary animate-fade-in mb-1">
         <div className="text-[10px] uppercase tracking-wider font-bold text-brand-primary mb-1 flex items-center gap-2">
           <Terminal className="w-3 h-3" /> Execution in {selectedTool}
         </div>
@@ -164,7 +164,7 @@ const ScenarioCard: React.FC<{ scenario: Scenario, selectedTool: ToolType }> = (
           >
             <div className="pt-4 mt-4 border-t border-white/10 space-y-4">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1 flex items-center gap-2">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 flex items-center gap-2">
                   <Sparkles className="w-3 h-3" /> The Analogy ({selectedTool})
                 </div>
                 <p className="text-xs text-gray-300 italic">"{currentDetails.realWorldAnalogy}"</p>
@@ -203,7 +203,7 @@ const WhyItMatters: React.FC<{
     <div className="mt-12">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full bg-white/5 border border-white/10 p-5 flex items-center justify-between gap-4 hover:border-brand-primary/30 hover:bg-white/[0.07] transition-all group ${isOpen ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`}
+        className={`w-full bg-[#111] border border-white/10 p-5 flex items-center justify-between gap-4 hover:border-brand-primary/30 hover:bg-[#151515] transition-all group ${isOpen ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`}
       >
         <div className="flex items-center gap-3">
           <div className="p-2 bg-brand-primary/20 rounded-lg text-brand-primary group-hover:scale-110 transition-transform">
@@ -212,7 +212,7 @@ const WhyItMatters: React.FC<{
           <h4 className="text-lg font-serif text-white">{title}</h4>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500 hidden md:inline">{isOpen ? 'Click to collapse' : 'Click to learn more'}</span>
+          <span className="text-xs text-gray-400 hidden md:inline">{isOpen ? 'Click to collapse' : 'Click to learn more'}</span>
           <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-90' : ''}`} />
         </div>
       </button>
@@ -226,7 +226,7 @@ const WhyItMatters: React.FC<{
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="bg-white/5 border border-white/10 border-t-0 rounded-b-2xl px-8 pb-8 pt-4">
+            <div className="bg-[#111] border border-white/10 border-t-0 rounded-b-2xl px-8 pb-8 pt-4">
               {/* Tool Selector */}
               <div className="flex justify-end mb-6">
                 <div className="flex bg-black/40 p-1 rounded-lg border border-white/10">
@@ -307,7 +307,7 @@ const ArchitectureDemo: React.FC = () => {
       >
 
         {/* Helper Text */}
-        <div className="absolute top-4 right-4 text-xs font-mono text-gray-500 opacity-50 group-hover:opacity-100 transition-opacity flex items-center gap-1 border border-white/10 px-2 py-1 rounded bg-black/40">
+        <div className="absolute top-4 right-4 text-xs font-mono text-gray-400 opacity-50 group-hover:opacity-100 transition-opacity flex items-center gap-1 border border-white/10 px-2 py-1 rounded bg-black/40">
           Click to advance <ChevronRight className="w-3 h-3" />
         </div>
 
@@ -395,7 +395,7 @@ const ArchitectureDemo: React.FC = () => {
       </div>
 
       {/* Description Panel */}
-      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-black/40 p-8 flex flex-col justify-between relative">
+      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-[#0a0a0a] p-8 flex flex-col justify-between relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500">
           <div
             className="h-full bg-white blur-[2px] transition-all duration-500 ease-out"
@@ -438,13 +438,13 @@ const ArchitectureDemo: React.FC = () => {
 
         {/* Legend */}
         <div className="mt-auto space-y-3 pt-6 border-t border-white/5">
-          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 0 || step === 4 ? 'opacity-100 text-white' : 'opacity-40 text-gray-500'}`}>
+          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 0 || step === 4 ? 'opacity-100 text-white' : 'opacity-40 text-gray-400'}`}>
             <div className="w-2 h-2 rounded-full bg-pink-500"></div> Front End (Client)
           </div>
-          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 1 || step === 2 ? 'opacity-100 text-white' : 'opacity-40 text-gray-500'}`}>
+          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 1 || step === 2 ? 'opacity-100 text-white' : 'opacity-40 text-gray-400'}`}>
             <div className="w-2 h-2 rounded-full bg-blue-500"></div> Back End (API)
           </div>
-          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 3 ? 'opacity-100 text-white' : 'opacity-40 text-gray-500'}`}>
+          <div className={`flex items-center gap-3 text-xs transition-opacity duration-300 ${step === 3 ? 'opacity-100 text-white' : 'opacity-40 text-gray-400'}`}>
             <div className="w-2 h-2 rounded-full bg-green-500"></div> Database (DB)
           </div>
         </div>
@@ -665,7 +665,7 @@ const DeploymentDemo: React.FC = () => {
           className="flex-1 relative p-8 md:p-12 min-h-[350px] flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 to-transparent cursor-pointer group select-none"
         >
           {/* Helper Text */}
-          <div className="absolute top-4 right-4 text-xs font-mono text-gray-500 opacity-50 group-hover:opacity-100 transition-opacity flex items-center gap-1 border border-white/10 px-2 py-1 rounded bg-black/40">
+          <div className="absolute top-4 right-4 text-xs font-mono text-gray-400 opacity-50 group-hover:opacity-100 transition-opacity flex items-center gap-1 border border-white/10 px-2 py-1 rounded bg-black/40">
             Click to advance <ChevronRight className="w-3 h-3" />
           </div>
 
@@ -681,10 +681,10 @@ const DeploymentDemo: React.FC = () => {
             {/* LOCAL DEV */}
             <div className={`relative flex flex-col items-center transition-all duration-500 ${step === 0 ? 'scale-110 opacity-100' : 'opacity-50 blur-[1px]'}`}>
               <div className={`w-24 h-24 bg-gray-900 rounded-2xl border-2 flex items-center justify-center mb-4 transition-colors ${step === 0 ? 'border-brand-primary shadow-[0_0_20px_rgba(255,194,14,0.3)]' : 'border-gray-700'}`}>
-                <Laptop className={`w-10 h-10 ${step === 0 ? 'text-brand-primary' : 'text-gray-600'}`} />
+                <Laptop className={`w-10 h-10 ${step === 0 ? 'text-brand-primary' : 'text-gray-500'}`} />
               </div>
               <div className="text-center">
-                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Local Environment</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Local Environment</div>
                 <div className="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-green-400">localhost:3000</div>
               </div>
               {step === 0 && (
@@ -697,12 +697,12 @@ const DeploymentDemo: React.FC = () => {
             {/* CLOUD HOSTING */}
             <div className={`relative flex flex-col items-center transition-all duration-500 ${step >= 1 ? 'scale-110 opacity-100' : 'opacity-40 blur-[2px]'}`}>
               <div className={`w-24 h-24 bg-gray-900 rounded-2xl border-2 flex items-center justify-center mb-4 transition-colors relative overflow-hidden ${step >= 1 ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-gray-700'}`}>
-                <Cloud className={`w-10 h-10 z-10 relative ${step >= 1 ? 'text-blue-500' : 'text-gray-600'}`} />
+                <Cloud className={`w-10 h-10 z-10 relative ${step >= 1 ? 'text-blue-500' : 'text-gray-500'}`} />
                 {step === 1 && <div className="absolute inset-0 bg-blue-500/10 animate-pulse"></div>}
               </div>
               <div className="text-center">
-                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Production Server</div>
-                <div className={`font-mono text-xs px-2 py-1 rounded transition-colors ${step === 2 ? 'bg-blue-500/20 text-blue-400' : 'bg-gray-800 text-gray-600'}`}>
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Production Server</div>
+                <div className={`font-mono text-xs px-2 py-1 rounded transition-colors ${step === 2 ? 'bg-blue-500/20 text-blue-400' : 'bg-gray-800 text-gray-500'}`}>
                   {step === 2 ? 'https://myapp.com' : 'Disconnected'}
                 </div>
               </div>
@@ -712,10 +712,10 @@ const DeploymentDemo: React.FC = () => {
             <div className={`relative flex flex-col items-center transition-all duration-500 ${step === 2 ? 'scale-110 opacity-100' : 'opacity-30 blur-[2px]'}`}>
               <div className="absolute -left-12 top-1/2 -translate-y-1/2 w-12 h-[2px] bg-blue-500/50 hidden md:block"></div>
               <div className={`w-24 h-24 bg-gray-900 rounded-full border-2 flex items-center justify-center mb-4 transition-colors ${step === 2 ? 'border-green-500 shadow-[0_0_20px_rgba(34,197,94,0.3)]' : 'border-gray-700'}`}>
-                <Globe className={`w-10 h-10 ${step === 2 ? 'text-green-500' : 'text-gray-600'}`} />
+                <Globe className={`w-10 h-10 ${step === 2 ? 'text-green-500' : 'text-gray-500'}`} />
               </div>
               <div className="text-center">
-                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">The World</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">The World</div>
                 <div className="text-xs text-gray-400">Customers</div>
               </div>
             </div>
@@ -724,7 +724,7 @@ const DeploymentDemo: React.FC = () => {
         </div>
 
         {/* Desc Panel */}
-        <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-black/40 p-8 flex flex-col justify-center">
+        <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-[#0a0a0a] p-8 flex flex-col justify-center">
           <div>
             <span className={`text-xs font-bold uppercase tracking-widest px-2 py-1 rounded mb-4 inline-block
                   ${step === 0 ? 'bg-brand-primary/20 text-brand-primary' :
@@ -766,13 +766,10 @@ const DeploymentDemo: React.FC = () => {
 
 const ToolsSection: React.FC = () => {
   return (
-    <div className="bg-black relative overflow-hidden min-h-screen">
-      {/* Texture Background */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#FFC20E_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
+    <div className="bg-transparent relative overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
 
-        <div className="text-center mb-20 animate-fade-in">
+        <div className="text-center mb-20 animate-fade-in animate-float-gentle">
           <div className="inline-block bg-white/10 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-6 border border-white/10">
             Software Fundamentals
           </div>

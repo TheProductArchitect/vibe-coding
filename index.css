@@ -14,6 +14,9 @@
 
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-gentle: float-gentle 8s ease-in-out infinite;
+  --animate-float-gentle-delayed: float-gentle 8s ease-in-out 2s infinite;
+  --animate-float-gentle-slow: float-gentle 10s ease-in-out 4s infinite;
   --animate-bounce-gentle: bounce-gentle 1.5s infinite;
 }
 
@@ -26,6 +29,18 @@
 
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes float-gentle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
   }
 }
 
@@ -46,18 +61,27 @@ body {
   font-family: var(--font-sans);
   background-color: #000000;
   color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a,
+[role="button"],
+[onClick] {
+  cursor: pointer;
 }
 
 /* ===== Utility Classes ===== */
 .glass-panel {
-  background: rgba(26, 26, 26, 0.6);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 194, 14, 0.2);
 }
 
 .glass-panel-light {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(17, 17, 17, 0.95);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }

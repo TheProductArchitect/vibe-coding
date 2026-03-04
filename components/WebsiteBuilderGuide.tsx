@@ -539,15 +539,15 @@ const LearningSection: React.FC = () => {
   return (
     <div className="mt-24 space-y-8">
       {/* Golden Rules */}
-      <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+      <div className="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
 
-        <div className="text-center mb-10">
+        <div className="animate-float-gentle text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4 border border-white/10">
             <BookOpen className="w-3 h-3" /> Quick Tips
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Golden Rules</h3>
-          <p className="text-gray-500 text-sm">Tap any rule to learn more.</p>
+          <p className="text-gray-400 text-sm">Tap any rule to learn more.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-3">
@@ -555,7 +555,7 @@ const LearningSection: React.FC = () => {
             <button
               key={i}
               onClick={() => setExpandedTip(expandedTip === i ? null : i)}
-              className="text-left bg-black/40 border border-white/5 rounded-xl p-4 hover:border-white/20 transition-all group"
+              className="text-left bg-[#0a0a0a] border border-white/5 rounded-xl p-4 hover:border-white/20 transition-all group"
             >
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-brand-primary/10 transition-colors">
@@ -564,7 +564,7 @@ const LearningSection: React.FC = () => {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <h4 className="text-sm font-bold text-white">{tip.title}</h4>
-                    <ChevronRight className={`w-3 h-3 text-gray-500 shrink-0 transition-transform ${expandedTip === i ? 'rotate-90' : ''}`} />
+                    <ChevronRight className={`w-3 h-3 text-gray-400 shrink-0 transition-transform ${expandedTip === i ? 'rotate-90' : ''}`} />
                   </div>
                   <p className="text-xs text-gray-400 mt-0.5">{tip.short}</p>
                 </div>
@@ -590,15 +590,15 @@ const LearningSection: React.FC = () => {
       </div>
 
       {/* Quick Resources */}
-      <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+      <div className="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary via-yellow-500 to-orange-500"></div>
 
-        <div className="text-center mb-8">
+        <div className="animate-float-gentle-delayed text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4 border border-brand-primary/20">
             <Link className="w-3 h-3" /> Resources
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Essential Tools</h3>
-          <p className="text-gray-500 text-sm">Bookmark these — you'll use them in every project.</p>
+          <p className="text-gray-400 text-sm">Bookmark these — you'll use them in every project.</p>
         </div>
 
         <div className="grid grid-cols-3 gap-2 md:gap-3">
@@ -608,13 +608,13 @@ const LearningSection: React.FC = () => {
               href={res.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black/40 border border-white/5 rounded-xl p-3 md:p-4 hover:border-brand-primary/30 hover:bg-white/5 transition-all group flex flex-col gap-1"
+              className="bg-[#0a0a0a] border border-white/5 rounded-xl p-3 md:p-4 hover:border-brand-primary/30 hover:bg-[#111] transition-all group flex flex-col gap-1"
             >
               <div className="flex items-center justify-between gap-1">
                 <span className="text-xs md:text-sm font-bold text-white group-hover:text-brand-primary transition-colors truncate">{res.name}</span>
-                <ExternalLink className="w-3 h-3 text-gray-600 group-hover:text-brand-primary shrink-0 transition-colors" />
+                <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-brand-primary shrink-0 transition-colors" />
               </div>
-              <span className="text-[10px] md:text-xs text-gray-500">{res.desc}</span>
+              <span className="text-[10px] md:text-xs text-gray-400">{res.desc}</span>
             </a>
           ))}
         </div>
@@ -714,7 +714,7 @@ const SetupVisualizer: React.FC = () => {
       </div>
 
       {/* Description Panel */}
-      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-black/40 p-8 flex flex-col justify-between relative">
+      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-[#0a0a0a] p-8 flex flex-col justify-between relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary via-purple-500 to-pink-500">
           <div
             className="h-full bg-white blur-[2px] transition-all duration-500 ease-out"
@@ -806,7 +806,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
   return (
     <div className="group/item relative mb-3 last:mb-0">
       <div
-        className={`bg-white/5 border border-white/10 rounded-lg p-3 transition-all cursor-pointer relative overflow-hidden group/card hover:border-brand-primary/50 hover:shadow-[0_0_15px_rgba(255,194,14,0.1)] hover:-translate-y-0.5`}
+        className={`bg-[#111] border border-white/10 rounded-lg p-3 transition-all cursor-pointer relative overflow-hidden group/card hover:border-brand-primary/50 hover:shadow-[0_0_15px_rgba(255,194,14,0.1)] hover:-translate-y-0.5`}
         onClick={() => hasDetails && setShowDetails(!showDetails)}
       >
         {/* Hover Light Effect */}
@@ -828,7 +828,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
                 {item.text}
               </div>
               {item.subtext && (
-                <div className="text-[10px] text-gray-500 mt-1">{item.subtext}</div>
+                <div className="text-[10px] text-gray-400 mt-1">{item.subtext}</div>
               )}
             </div>
           </div>
@@ -836,7 +836,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
           <div className="flex items-center gap-1 shrink-0">
             {hasDetails && (
               <button
-                className={`p-1.5 rounded hover:bg-white/10 transition-colors ${showDetails ? 'text-brand-primary' : 'text-gray-500'}`}
+                className={`p-1.5 rounded hover:bg-white/10 transition-colors ${showDetails ? 'text-brand-primary' : 'text-gray-400'}`}
                 title="View Details"
               >
                 <Eye className="w-3 h-3" />
@@ -844,7 +844,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
             )}
             <button
               onClick={(e) => { e.stopPropagation(); copyToClipboard(item.text); }}
-              className="p-1.5 rounded hover:bg-white/10 text-gray-500 hover:text-white transition-colors"
+              className="p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
               title="Copy"
             >
               {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
@@ -866,7 +866,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
                 {/* Expected Output */}
                 {item.expectedOutput && (
                   <div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Expected Output</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Expected Output</div>
                     <div className="bg-black/50 rounded p-2 text-[10px] font-mono text-green-400 whitespace-pre-wrap">
                       {item.expectedOutput}
                     </div>
@@ -876,7 +876,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
                 {/* Why This Matters */}
                 {item.why && (
                   <div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Why This Matters</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Why This Matters</div>
                     <p className="text-[11px] text-gray-300 leading-relaxed">
                       {item.why}
                     </p>
@@ -886,7 +886,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
                 {/* Best Practices */}
                 {item.bestPractices && (
                   <div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Best Practices</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Best Practices</div>
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-3 h-3 text-brand-primary mt-0.5 shrink-0" />
                       <p className="text-[11px] text-gray-300 leading-relaxed">
@@ -922,12 +922,13 @@ const WebsiteBuilderGuide: React.FC = () => {
   const phases = getPhases();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 relative">
+      {/* Galaxy Starfield */}
       {/* Page Intro */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-16"
+        className="animate-float-gentle text-center mb-16"
       >
         <div className="inline-block bg-brand-primary/10 text-brand-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-6 border border-brand-primary/20">
           Build My First App
@@ -938,7 +939,7 @@ const WebsiteBuilderGuide: React.FC = () => {
         <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light mb-4">
           Go from idea to live website. Pick a path that matches your comfort level — all roads lead to a real, deployed product.
         </p>
-        <p className="text-sm text-gray-500 max-w-lg mx-auto">
+        <p className="text-sm text-gray-400 max-w-lg mx-auto">
           Each path includes step-by-step instructions with copy-paste prompts, expected outputs, and best practices.
         </p>
       </motion.div>
@@ -946,7 +947,7 @@ const WebsiteBuilderGuide: React.FC = () => {
       {/* Path Selector */}
       <div className="mb-16 max-w-5xl mx-auto">
         <h3 className="text-xl font-serif text-white mb-2 text-center">Choose Your Path</h3>
-        <p className="text-sm text-gray-500 mb-8 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
+        <p className="text-sm text-gray-400 mb-8 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
 
         <div className="grid md:grid-cols-3 gap-4">
           {BUILD_PATHS.map((path) => {
@@ -981,7 +982,7 @@ const WebsiteBuilderGuide: React.FC = () => {
                 <h4 className="text-lg font-bold text-white mb-1">{path.name}</h4>
                 <p className={`text-xs font-bold mb-3 ${path.color}`}>{path.tagline}</p>
                 <p className="text-sm text-gray-400 leading-relaxed mb-3">{path.description}</p>
-                <p className="text-xs text-gray-500"><span className="text-gray-400 font-medium">Best for:</span> {path.bestFor}</p>
+                <p className="text-xs text-gray-400"><span className="text-gray-400 font-medium">Best for:</span> {path.bestFor}</p>
               </button>
             );
           })}

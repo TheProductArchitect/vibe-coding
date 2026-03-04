@@ -32,14 +32,14 @@ const VibeLab: React.FC = () => {
         <p className="text-gray-300 max-w-2xl mx-auto mb-6">
           Experience how "Vibe Coding" works. You describe the feeling or business intent, and the AI translates it into technical design decisions.
         </p>
-        
+
         {/* Pro Tip Banner */}
         <div className="inline-flex flex-col sm:flex-row items-center gap-3 bg-cjbs-primary/20 border border-cjbs-primary/40 rounded-lg px-4 py-2 text-sm text-gray-200">
-           <Zap className="w-4 h-4 text-yellow-400 fill-current" />
-           <span>For best results in real coding, use Gemini Pro.</span>
-           <a href={STUDENT_SIGNUP_LINK} target="_blank" rel="noopener noreferrer" className="text-ai-cyan hover:text-white font-semibold underline flex items-center gap-1">
-             Get Student Free Access <ExternalLink className="w-3 h-3" />
-           </a>
+          <Zap className="w-4 h-4 text-yellow-400 fill-current" />
+          <span>For best results in real coding, use Gemini Pro.</span>
+          <a href={STUDENT_SIGNUP_LINK} target="_blank" rel="noopener noreferrer" className="text-ai-cyan hover:text-white font-semibold underline flex items-center gap-1">
+            Get Student Free Access <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ const VibeLab: React.FC = () => {
         <div className="glass-panel p-8 rounded-2xl flex flex-col justify-between min-h-[450px] border-t-4 border-t-cjbs-primary">
           <div>
             <label className="block text-lg font-serif font-medium text-white mb-2">
-               What are we building today?
+              What are we building today?
             </label>
             <p className="text-xs text-gray-400 mb-4">Be expressive. Focus on the user's emotion and the business goal.</p>
             <textarea
@@ -58,17 +58,16 @@ const VibeLab: React.FC = () => {
               onChange={(e) => setPrompt(e.target.value)}
             />
           </div>
-          
+
           <div>
             <div className="mt-4 flex justify-end">
               <button
                 onClick={handleVibeCheck}
                 disabled={loading || !prompt}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                  loading || !prompt
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${loading || !prompt
                     ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-ai-purple to-ai-cyan text-white hover:scale-105 shadow-lg shadow-ai-purple/25'
-                }`}
+                  }`}
               >
                 {loading ? (
                   <>
@@ -83,9 +82,9 @@ const VibeLab: React.FC = () => {
                 )}
               </button>
             </div>
-            
+
             <div className="mt-8 pt-6 border-t border-white/5">
-              <p className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">One-click Presets</p>
+              <p className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wider">One-click Presets</p>
               <div className="flex flex-wrap gap-2">
                 <button onClick={() => setPrompt("Minimalist luxury fashion brand based in Paris, very high end, serif fonts")} className="text-xs hover:bg-white/10 hover:text-white text-gray-400 border border-gray-700 px-3 py-1.5 rounded-full transition-colors">Luxury Fashion</button>
                 <button onClick={() => setPrompt("Cyberpunk arcade game interface with neon glitches and dark mode")} className="text-xs hover:bg-white/10 hover:text-white text-gray-400 border border-gray-700 px-3 py-1.5 rounded-full transition-colors">Cyberpunk</button>
@@ -128,7 +127,7 @@ const VibeLab: React.FC = () => {
                     <div className="flex gap-3">
                       {result.colorPalette.map((color, idx) => (
                         <div key={idx} className="group relative">
-                          <div 
+                          <div
                             className="w-10 h-10 rounded-lg shadow-lg border border-white/10 transition-transform hover:scale-110 cursor-pointer"
                             style={{ backgroundColor: color }}
                           />
@@ -141,39 +140,39 @@ const VibeLab: React.FC = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                     <div className="bg-white/5 p-3 rounded-lg">
-                        <h4 className="text-xs text-gray-400 uppercase tracking-wider mb-1">Typography</h4>
-                        <p className="text-white text-sm font-medium">{result.fontPairing}</p>
-                     </div>
-                     <div className="bg-white/5 p-3 rounded-lg">
-                        <h4 className="text-xs text-gray-400 uppercase tracking-wider mb-1">Layout</h4>
-                        <p className="text-white text-sm font-medium">{result.layoutStyle}</p>
-                     </div>
+                    <div className="bg-white/5 p-3 rounded-lg">
+                      <h4 className="text-xs text-gray-400 uppercase tracking-wider mb-1">Typography</h4>
+                      <p className="text-white text-sm font-medium">{result.fontPairing}</p>
+                    </div>
+                    <div className="bg-white/5 p-3 rounded-lg">
+                      <h4 className="text-xs text-gray-400 uppercase tracking-wider mb-1">Layout</h4>
+                      <p className="text-white text-sm font-medium">{result.layoutStyle}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8 pt-6 border-t border-white/10 text-center">
-                 <p className="text-sm text-gray-400 mb-3">Ready to build this in Lovable?</p>
-                 <a 
-                   href="https://lovable.dev/" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-white text-cjbs-dark font-bold rounded-lg hover:bg-gray-200 transition-colors"
-                 >
-                    Launch Lovable <ArrowRight className="w-4 h-4" />
-                 </a>
+                <p className="text-sm text-gray-400 mb-3">Ready to build this in Lovable?</p>
+                <a
+                  href="https://lovable.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-white text-cjbs-dark font-bold rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Launch Lovable <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           ) : (
             <div className="glass-panel p-8 rounded-2xl h-full flex flex-col items-center justify-center text-center border-dashed border-2 border-gray-700">
-               <div className="w-20 h-20 bg-gray-800/50 rounded-full flex items-center justify-center mb-6 animate-pulse">
-                  <Sparkles className="w-10 h-10 text-gray-500" />
-               </div>
-               <h3 className="text-xl font-semibold text-gray-400 mb-2">Awaiting Vibe Input</h3>
-               <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-                 Enter a prompt on the left to see how Generative AI translates abstract concepts into concrete design specifications.
-               </p>
+              <div className="w-20 h-20 bg-gray-800/50 rounded-full flex items-center justify-center mb-6 animate-pulse">
+                <Sparkles className="w-10 h-10 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-400 mb-2">Awaiting Vibe Input</h3>
+              <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
+                Enter a prompt on the left to see how Generative AI translates abstract concepts into concrete design specifications.
+              </p>
             </div>
           )}
         </div>

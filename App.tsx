@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { Bot, GraduationCap, LayoutDashboard, Sparkles, BookOpen, Rocket, Hammer, Lightbulb, Globe, Code } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Bot, GraduationCap, LayoutDashboard, Sparkles, BookOpen, Rocket, Hammer, Lightbulb, Globe, Code, MousePointerClick, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import Curriculum from './components/Curriculum';
 import ToolsSection from './components/ToolsSection';
 import WebsiteBuilderGuide from './components/WebsiteBuilderGuide';
+import StarfieldBackground from './components/StarfieldBackground';
 import { AppState } from './types';
 
 const App: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<AppState>(AppState.HOME);
+  const [showCursorTip, setShowCursorTip] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCursorTip(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -33,27 +43,27 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-xs font-bold tracking-widest uppercase mb-8">
+            <div className="animate-float-gentle inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-xs font-bold tracking-widest uppercase mb-8">
               <Sparkles className="w-3 h-3" />
               The Future of Building
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold font-serif text-white mb-6 tracking-tight leading-tight">
+            <h1 className="animate-float-gentle-delayed text-5xl md:text-7xl font-bold font-serif text-white mb-6 tracking-tight leading-tight">
               Vibe <br />
               <span className="text-brand-primary">
                 Coding
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto mb-4 leading-relaxed font-light">
+            <p className="animate-float-gentle-slow text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto mb-4 leading-relaxed font-light">
               Turn your ideas into live web apps instantly. <span className="text-white font-medium">Zero coding required.</span>
             </p>
 
-            <p className="text-sm text-gray-500 max-w-lg mx-auto mb-10 leading-relaxed">
+            <p className="animate-float-gentle text-sm text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
               Master the art of prompting. Learn to build, deploy, and scale real software using advanced AI tools — entirely through plain English.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="animate-float-gentle-delayed flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => setActiveTab(AppState.NEW_TO_VIBE)}
                 className="px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors flex items-center gap-2 justify-center shadow-xl"
@@ -75,67 +85,102 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-brand-primary selection:text-black font-sans">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-panel border-b border-white/10 bg-black/80" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          <div
-            className="flex items-center gap-4 cursor-pointer group"
-            onClick={() => setActiveTab(AppState.HOME)}
-          >
-            {/* Logo */}
-            <div className="w-10 h-10 bg-brand-primary rounded-sm flex items-center justify-center shadow-lg transform group-hover:rotate-3 transition-transform">
-              <span className="font-serif font-bold text-black text-lg">V</span>
+    <div className="min-h-screen bg-black text-white selection:bg-brand-primary selection:text-black font-sans relative overflow-x-hidden">
+      {/* Global Galaxy Starfield */}
+      <StarfieldBackground />
+
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Navigation */}
+        <nav className="fixed top-0 w-full z-50 glass-panel border-b border-white/10 bg-black/80" aria-label="Main navigation">
+          <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <div
+              className="flex items-center gap-4 cursor-pointer group"
+              onClick={() => setActiveTab(AppState.HOME)}
+            >
+              {/* Logo */}
+              <div className="w-10 h-10 bg-brand-primary rounded-sm flex items-center justify-center shadow-lg transform group-hover:rotate-3 transition-transform">
+                <span className="font-serif font-bold text-black text-lg">V</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white text-sm tracking-wide group-hover:text-brand-primary transition-colors uppercase">
+                  Vibe Coding
+                </span>
+                <span className="text-xs text-gray-400 tracking-wider">Build with AI</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-white text-sm tracking-wide group-hover:text-brand-primary transition-colors uppercase">
-                Vibe Coding
-              </span>
-              <span className="text-xs text-gray-400 tracking-wider">Build with AI</span>
+
+            <div className="flex gap-2">
+              {[
+                { id: AppState.HOME, label: 'Home', icon: LayoutDashboard, title: "Home" },
+                { id: AppState.NEW_TO_VIBE, label: "I'm New", icon: Lightbulb, title: "I'm new to vibe coding — start here" },
+                { id: AppState.WHAT_IS_WEB_APP, label: 'How Software Works', icon: Globe, title: "Understanding how software works" },
+                { id: AppState.BUILD_WORKFLOW, label: 'Build', icon: Rocket, title: "Build and deploy my first app" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  title={item.title}
+                  aria-label={item.label}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === item.id
+                    ? 'bg-brand-primary text-black shadow-lg shadow-brand-primary/25'
+                    : 'text-gray-400 hover:text-white hover:bg-white/10'
+                    }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span className="hidden md:inline">{item.label}</span>
+                </button>
+              ))}
             </div>
           </div>
+        </nav>
 
-          <div className="flex gap-2">
-            {[
-              { id: AppState.HOME, label: 'Home', icon: LayoutDashboard, title: "Home" },
-              { id: AppState.NEW_TO_VIBE, label: "I'm New", icon: Lightbulb, title: "I'm new to vibe coding — start here" },
-              { id: AppState.WHAT_IS_WEB_APP, label: 'How Software Works', icon: Globe, title: "Understanding how software works" },
-              { id: AppState.BUILD_WORKFLOW, label: 'Build', icon: Rocket, title: "Build and deploy my first app" },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                title={item.title}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === item.id
-                  ? 'bg-brand-primary text-black shadow-lg shadow-brand-primary/25'
-                  : 'text-gray-400 hover:text-white hover:bg-white/10'
-                  }`}
-              >
-                <item.icon className="w-4 h-4" />
-                <span className="hidden md:inline">{item.label}</span>
+        {/* Main Content */}
+        <main className="pt-28 pb-12">
+          {renderContent()}
+        </main>
+
+        {/* Footer */}
+        <footer
+          className="border-t border-white/10 py-6 mt-12 bg-black/40 backdrop-blur-md cursor-pointer hover:bg-black/60 transition-colors"
+          onClick={(e) => {
+            const event = new CustomEvent('scrambleStars', { detail: { x: e.clientX, y: e.clientY } });
+            window.dispatchEvent(event);
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="text-left pointer-events-none">
+              <h2 className="text-white font-bold mb-2">Vibe Coding</h2>
+              <p className="text-gray-400 text-sm">Build real products with AI — no coding experience required.</p>
+            </div>
+            <div className="flex items-center gap-6 text-sm text-gray-400">
+              <span>Copyright © 2026 Venu Gopinath. All rights reserved.</span>
+            </div>
+          </div>
+        </footer>
+
+        {/* Global Interactive Tip */}
+        <AnimatePresence>
+          {showCursorTip && (
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed bottom-6 right-6 z-[100] bg-brand-primary text-black px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 max-w-sm"
+            >
+              <div className="bg-black/10 p-2 rounded-full shrink-0">
+                <MousePointerClick className="w-5 h-5 animate-bounce-gentle" />
+              </div>
+              <div>
+                <strong className="font-bold text-sm block">Interactive Elements</strong>
+                <p className="text-xs opacity-90">Look for the hand cursor to click and explore!</p>
+              </div>
+              <button aria-label="Close Tip" onClick={() => setShowCursorTip(false)} className="ml-2 hover:bg-black/10 p-1 rounded transition-colors shrink-0">
+                <X className="w-4 h-4" />
               </button>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <main className="pt-28 pb-12">
-        {renderContent()}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-12 mt-12 bg-brand-gray">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-left">
-            <h2 className="text-white font-bold mb-2">Vibe Coding</h2>
-            <p className="text-gray-500 text-sm">Build real products with AI — no coding experience required.</p>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <span>Copyright © 2026 Venu Gopinath. All rights reserved.</span>
-          </div>
-        </div>
-      </footer>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

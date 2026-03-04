@@ -163,7 +163,7 @@ const Curriculum: React.FC = () => {
                       {tool.icon}
                     </div>
                     {tool.badge && (
-                      <span className="text-[10px] font-bold uppercase px-2 py-1 rounded border border-white/10 text-gray-400 bg-white/5">
+                      <span className="text-[10px] font-bold uppercase px-2 py-1 rounded border border-white/10 text-gray-400 bg-[#111]">
                         {tool.badge}
                       </span>
                     )}
@@ -184,7 +184,7 @@ const Curriculum: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="mt-3 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-brand-primary transition-colors relative z-10"
+                    className="mt-3 inline-flex items-center gap-1 text-xs text-gray-400 hover:text-brand-primary transition-colors relative z-10"
                   >
                     Visit {tool.name} <ExternalLink className="w-3 h-3" />
                   </a>
@@ -193,14 +193,14 @@ const Curriculum: React.FC = () => {
             </div>
 
             <div className="flex justify-between items-center">
-              <button onClick={() => setCurrentStep(0)} className="text-gray-500 hover:text-white transition-colors font-medium">
+              <button onClick={() => setCurrentStep(0)} className="text-gray-400 hover:text-white transition-colors font-medium">
                 Back
               </button>
               <button
                 onClick={() => setCurrentStep(2)}
                 disabled={!selectedTool}
                 className={`flex items-center gap-2 px-8 py-4 rounded-xl font-bold transition-all ${!selectedTool
-                  ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                  ? 'bg-gray-800 text-gray-400 cursor-not-allowed'
                   : 'bg-brand-primary text-black hover:scale-105 shadow-lg shadow-brand-primary/20'
                   }`}
               >
@@ -242,7 +242,7 @@ const Curriculum: React.FC = () => {
             </div>
 
             <div className="flex justify-between items-center">
-              <button onClick={() => setCurrentStep(1)} className="text-gray-500 hover:text-white transition-colors font-medium">
+              <button onClick={() => setCurrentStep(1)} className="text-gray-400 hover:text-white transition-colors font-medium">
                 Back
               </button>
               <button
@@ -252,7 +252,7 @@ const Curriculum: React.FC = () => {
                 }}
                 disabled={!userIdea.trim()}
                 className={`flex items-center gap-2 px-8 py-4 rounded-xl font-bold transition-all ${!userIdea.trim()
-                  ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                  ? 'bg-gray-800 text-gray-400 cursor-not-allowed'
                   : 'bg-brand-primary text-black hover:scale-105 shadow-lg shadow-brand-primary/20'
                   }`}
               >
@@ -314,7 +314,7 @@ const Curriculum: React.FC = () => {
             </div>
 
             <div className="mt-8">
-              <button onClick={() => setCurrentStep(0)} className="text-gray-500 hover:text-white underline text-sm">
+              <button onClick={() => setCurrentStep(0)} className="text-gray-400 hover:text-white underline text-sm">
                 Start Over
               </button>
             </div>
@@ -327,16 +327,16 @@ const Curriculum: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 min-h-screen flex flex-col">
-      <div className="text-center mb-12">
+      <div className="animate-float-gentle text-center mb-12">
         <span className="text-brand-primary font-bold text-sm tracking-widest uppercase mb-3 block">I'm New to Vibe Coding</span>
         <h2 className="text-4xl md:text-5xl font-serif text-white mb-2">Start Here</h2>
-        <p className="text-gray-500 text-sm max-w-lg mx-auto">Everything you need to understand vibe coding and build your first project.</p>
+        <p className="text-gray-400 text-sm max-w-lg mx-auto">Everything you need to understand vibe coding and build your first project.</p>
       </div>
 
       {/* What is Vibe Coding - Interactive Auto-Advancing Loop */}
       <div className="mb-16 max-w-4xl mx-auto w-full">
         <h3 className="text-2xl font-serif text-white mb-2 text-center">What is Vibe Coding?</h3>
-        <p className="text-center text-sm text-gray-500 mb-8">
+        <p className="text-center text-sm text-gray-400 mb-8">
           {loopCycle === 0 ? 'Drag or click "Describe" to start — watch the magic unfold!' : 'Describe your changes to start another cycle ↻'}
         </p>
 
@@ -487,19 +487,19 @@ const Curriculum: React.FC = () => {
           <div className="bg-brand-gray border border-white/10 rounded-2xl p-5 hover:border-brand-primary/30 transition-colors text-center">
             <span className="text-2xl mb-2 block">🎯</span>
             <h4 className="text-sm font-bold text-white mb-1">You're the Architect</h4>
-            <p className="text-xs text-gray-500">AI writes code. You direct the vision.</p>
+            <p className="text-xs text-gray-400">AI writes code. You direct the vision.</p>
           </div>
 
           <div className="bg-brand-gray border border-white/10 rounded-2xl p-5 hover:border-brand-primary/30 transition-colors text-center">
             <span className="text-2xl mb-2 block">💡</span>
             <h4 className="text-sm font-bold text-white mb-1">3 Skills That Matter</h4>
-            <p className="text-xs text-gray-500">Describe clearly · Paste errors · Test everything</p>
+            <p className="text-xs text-gray-400">Describe clearly · Paste errors · Test everything</p>
           </div>
 
           <div className="bg-brand-gray border border-white/10 rounded-2xl p-5 hover:border-brand-primary/30 transition-colors text-center">
             <span className="text-2xl mb-2 block">🆓</span>
             <h4 className="text-sm font-bold text-white mb-1">Free to Start</h4>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">AI Studio</a>
               {" · "}
               <a href="https://cursor.sh" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">Cursor</a>
@@ -513,7 +513,7 @@ const Curriculum: React.FC = () => {
       {/* Workshop Steps Header with context */}
       <div className="text-center mb-8">
         <h3 className="text-2xl font-serif text-white mb-2">Your First Session</h3>
-        <p className="text-gray-500 text-sm max-w-lg mx-auto">
+        <p className="text-gray-400 text-sm max-w-lg mx-auto">
           Now that you know the loop, let's put it into practice. Pick a tool, write a prompt, and launch your first app — all in under 10 minutes.
         </p>
       </div>
@@ -537,7 +537,7 @@ const Curriculum: React.FC = () => {
                   ${isActive
                     ? 'bg-brand-primary/10 border-brand-primary shadow-[0_0_30px_rgba(255,194,14,0.15)] scale-[1.02]'
                     : isCompleted
-                      ? 'bg-white/5 border-brand-primary/40 hover:border-brand-primary/70 cursor-pointer'
+                      ? 'bg-[#1a1a1a] border-brand-primary/40 hover:border-brand-primary/70 cursor-pointer'
                       : 'bg-white/[0.02] border-white/10 opacity-50 cursor-default'
                   }
                 `}
@@ -545,7 +545,7 @@ const Curriculum: React.FC = () => {
                 {/* Step Number Badge */}
                 <div className={`
                   w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors
-                  ${isActive ? 'bg-brand-primary text-black' : isCompleted ? 'bg-brand-primary/30 text-brand-primary' : 'bg-white/10 text-gray-500'}
+                  ${isActive ? 'bg-brand-primary text-black' : isCompleted ? 'bg-brand-primary/30 text-brand-primary' : 'bg-white/10 text-gray-400'}
                 `}>
                   {isCompleted ? '✓' : index + 1}
                 </div>
@@ -553,7 +553,7 @@ const Curriculum: React.FC = () => {
                 {/* Icon */}
                 <div className={`
                   w-10 h-10 rounded-xl flex items-center justify-center transition-colors
-                  ${isActive ? 'bg-brand-primary/20 text-brand-primary' : isCompleted ? 'bg-white/10 text-brand-primary/70' : 'bg-white/5 text-gray-600'}
+                  ${isActive ? 'bg-brand-primary/20 text-brand-primary' : isCompleted ? 'bg-[#1a1a1a] text-brand-primary/70' : 'bg-[#111] text-gray-500'}
                 `}>
                   <StepIcon className="w-5 h-5" />
                 </div>
@@ -561,7 +561,7 @@ const Curriculum: React.FC = () => {
                 {/* Title */}
                 <span className={`
                   text-xs font-bold uppercase tracking-wider leading-tight
-                  ${isActive ? 'text-brand-primary' : isCompleted ? 'text-gray-300' : 'text-gray-500'}
+                  ${isActive ? 'text-brand-primary' : isCompleted ? 'text-gray-300' : 'text-gray-400'}
                 `}>
                   {step.title}
                 </span>
