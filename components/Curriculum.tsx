@@ -67,12 +67,9 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
     const result = await enhanceUserPrompt(userIdea, toolName);
     setGeneratedPrompt(result);
     setIsGenerating(false);
-    // Detect if response is AI-generated (contains PGTC framework) or fallback
-    if (result.includes('Persona') && result.includes('Goal') && result.includes('Task') && result.includes('Context')) {
-      setHfStatus('success');
-    } else {
-      setHfStatus('fallback');
-    }
+    // Detect if response is AI-generated or fallback (check for warmup message or generic starter)
+    const isFallback = result.includes('warming up') || result.startsWith('Persona: You are an expert full-stack');
+    setHfStatus(isFallback ? 'fallback' : 'success');
   };
 
   const copyToClipboard = () => {
