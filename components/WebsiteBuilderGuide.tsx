@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Terminal, Globe, Rocket, Search, Code, CheckCircle, Copy, ChevronRight, ChevronLeft, GitBranch, Server, Zap, Layout, Play, ArrowDown, RefreshCw, MessageSquare, UserPlus, Key, Settings, Download, ExternalLink, MousePointerClick, Eye, Check, Power, BookOpen, Sparkles, Lightbulb, AlertCircle, FileText, Target, Wrench, Shield, TrendingUp, HelpCircle, Link } from 'lucide-react';
 import ScrollProgressLine from './ScrollProgressLine';
@@ -908,6 +908,14 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
 const WebsiteBuilderGuide: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedPath, setSelectedPath] = useState<BuildPathId | null>(null);
+  const [showPopup, setShowPopup] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const getPhases = (): WorkflowPhase[] => {
     switch (selectedPath) {
@@ -945,9 +953,30 @@ const WebsiteBuilderGuide: React.FC = () => {
       </motion.div>
 
       {/* Path Selector */}
-      <div className="mb-16 max-w-5xl mx-auto">
+      <div className="mb-16 max-w-5xl mx-auto relative">
         <h3 className="text-xl font-serif text-white mb-2 text-center">Choose Your Path</h3>
-        <p className="text-sm text-gray-400 mb-8 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
+        <div className="flex flex-col items-center justify-center mb-8">
+          <p className="text-sm text-gray-400 mb-3 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
+        </div>
+
+        {/* Floating Cloud Popup */}
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, x: -20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.9, x: 20 }}
+              className="absolute -right-12 top-24 z-20 hidden lg:flex"
+            >
+              <div className="relative bg-brand-primary text-black font-bold text-sm px-4 py-3 rounded-2xl shadow-[0_0_30px_rgba(255,194,14,0.3)] animate-float flex items-center gap-2 max-w-[200px]">
+                {/* Cloud Tail */}
+                <div className="absolute top-1/2 -left-3 -translate-y-1/2 w-4 h-4 bg-brand-primary rotate-45 rounded-sm"></div>
+                <MousePointerClick className="w-5 h-5 shrink-0 animate-bounce-gentle" />
+                <span>Click a path to expand it!</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="grid md:grid-cols-3 gap-4">
           {BUILD_PATHS.map((path) => {
