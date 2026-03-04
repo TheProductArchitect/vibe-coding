@@ -348,31 +348,23 @@ const Curriculum: React.FC = () => {
           ];
           const cycleData = CYCLE_EXAMPLES[loopCycle % CYCLE_EXAMPLES.length];
 
-          // Phase within the auto-advance: 0=waiting for Describe, 1=Describe done, 2=Generate done, 3=Iterate done
+          // Phase within the manual progression: 0=waiting for Describe, 1=Describe done (waiting for Generate), 2=Generate done (waiting for Iterate), 3=Iterate done
           const currentPhase = activeLoopStep % 4;
-          const isWaiting = currentPhase === 0;
 
-          const triggerLoop = () => {
-            if (!isWaiting) return;
-            // Step 1: Describe
-            setActiveLoopStep(prev => prev + 1);
-            // Step 2: Generate (auto after 1s)
-            setTimeout(() => setActiveLoopStep(prev => prev + 1), 1000);
-            // Step 3: Iterate (auto after 2.5s)
-            setTimeout(() => {
+          const advancePhase = () => {
+            if (currentPhase === 3) {
+              // Reset for next cycle
+              setLoopCycle(prev => prev + 1);
+              setActiveLoopStep(0);
+            } else {
               setActiveLoopStep(prev => prev + 1);
-              // After 2s, reset for next cycle
-              setTimeout(() => {
-                setLoopCycle(prev => prev + 1);
-                setActiveLoopStep(prev => prev + 1);
-              }, 2000);
-            }, 2500);
+            }
           };
 
           const steps = [
-            { label: "Describe", icon: "💬", color: "from-blue-500 to-cyan-500" },
-            { label: "Generate", icon: "⚡", color: "from-purple-500 to-pink-500" },
-            { label: "Iterate", icon: "🔄", color: "from-brand-primary to-orange-500" },
+            { label: "Describe", icon: "💬", color: "from-blue-500 to-cyan-500", instruction: 'drag to start' },
+            { label: "Generate", icon: "⚡", color: "from-purple-500 to-pink-500", instruction: 'drag to generate' },
+            { label: "Iterate", icon: "🔄", color: "from-brand-primary to-orange-500", instruction: 'drag to refine' },
           ];
 
           return (
@@ -382,38 +374,39 @@ const Curriculum: React.FC = () => {
                 {steps.map((step, i) => {
                   const phaseForStep = i + 1; // Describe=1, Generate=2, Iterate=3
                   const isLit = currentPhase >= phaseForStep;
-                  const isCurrentlyAnimating = currentPhase === phaseForStep;
-                  const canDrag = i === 0 && isWaiting;
+                  const canDrag = currentPhase === i;
 
                   return (
                     <React.Fragment key={i}>
                       <div
                         draggable={canDrag}
-                        onDragStart={(e) => { if (canDrag) e.dataTransfer.setData('text/plain', '0'); }}
-                        onClick={() => { if (canDrag) triggerLoop(); }}
-                        className={`relative select-none transition-all duration-500 ${canDrag ? 'cursor-grab active:cursor-grabbing scale-110 animate-bounce' :
-                          isCurrentlyAnimating ? 'scale-125' :
-                            isLit ? 'scale-100 opacity-70' : 'opacity-30 scale-90'
+                        onDragStart={(e) => { if (canDrag) e.dataTransfer.setData('text/plain', i.toString()); }}
+                        onClick={() => { if (canDrag) advancePhase(); }}
+                        className={`relative select-none transition-all duration-500 ${canDrag ? 'cursor-grab active:cursor-grabbing scale-110 shadow-[0_0_20px_rgba(255,194,14,0.3)] bounce-gentle z-10' :
+                          isLit ? 'scale-100 opacity-80' : 'opacity-40 scale-90 grayscale'
                           }`}
-                        title={canDrag ? 'Drag or click to describe your idea' : ''}
+                        title={canDrag ? `Drag or click to ${step.label}` : ''}
                       >
-                        <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${step.color} p-[1px] transition-shadow duration-500 ${isCurrentlyAnimating ? 'shadow-[0_0_25px_rgba(255,194,14,0.4)]' : ''}`}>
-                          <div className="w-full h-full bg-black rounded-[15px] flex flex-col items-center justify-center gap-0.5">
-                            <span className="text-lg md:text-xl">{step.icon}</span>
-                            <span className="text-[9px] md:text-[10px] font-bold text-white uppercase tracking-wider">{step.label}</span>
+                        <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${step.color} p-[1px] transition-all duration-500`}>
+                          <div className="w-full h-full bg-black rounded-[15px] flex flex-col items-center justify-center gap-0.5 relative overflow-hidden">
+                            {canDrag && <div className="absolute inset-0 bg-white/10 animate-pulse" />}
+                            <span className="text-lg md:text-xl relative z-10">{step.icon}</span>
+                            <span className="text-[9px] md:text-[10px] font-bold text-white uppercase tracking-wider relative z-10">{step.label}</span>
                           </div>
                         </div>
                         {canDrag && (
-                          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-brand-primary text-[10px] font-bold whitespace-nowrap animate-pulse">
-                            {loopCycle === 0 ? '↑ drag me' : '↑ describe changes'}
+                          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-brand-primary text-[11px] font-bold whitespace-nowrap animate-pulse flex flex-col items-center">
+                            ↑ {step.instruction}
                           </div>
                         )}
-                        {isCurrentlyAnimating && (
-                          <div className="absolute -top-2 -right-2 w-4 h-4 bg-brand-primary rounded-full animate-ping" />
+                        {canDrag && (
+                          <div className="absolute -top-2 -right-2 w-4 h-4 bg-brand-primary text-black text-[9px] flex items-center justify-center font-bold rounded-full animate-bounce shadow-lg">
+                            {i + 1}
+                          </div>
                         )}
                       </div>
                       {i < 2 && (
-                        <ArrowRight className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-500 ${isLit ? 'text-brand-primary scale-110' : 'text-gray-700'}`} />
+                        <ArrowRight className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-500 ${currentPhase > i ? 'text-brand-primary scale-110' : 'text-gray-700'}`} />
                       )}
                     </React.Fragment>
                   );
@@ -423,45 +416,68 @@ const Curriculum: React.FC = () => {
               {/* Drop Zone / Result Display */}
               <div
                 onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => { e.preventDefault(); triggerLoop(); }}
-                className={`w-full max-w-md mt-2 border-2 border-dashed rounded-2xl p-6 text-center transition-all min-h-[120px] flex flex-col items-center justify-center ${isWaiting ? 'border-white/10 hover:border-brand-primary/40 hover:bg-brand-primary/5' : 'border-brand-primary/20 bg-brand-primary/5'
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                  if (draggedIndex === currentPhase) {
+                    advancePhase();
+                  }
+                }}
+                className={`w-full max-w-md mt-4 border-2 border-dashed rounded-2xl p-6 text-center transition-all min-h-[140px] flex flex-col items-center justify-center relative overflow-hidden
+                  ${currentPhase === 3 ? 'border-brand-primary/40 bg-brand-primary/10 shadow-[0_0_30px_rgba(255,194,14,0.1)]' :
+                    currentPhase > 0 ? 'border-brand-primary/20 bg-brand-primary/5' :
+                      'border-white/10 hover:border-brand-primary/40 hover:bg-brand-primary/5'
                   }`}
               >
-                {activeLoopStep === 0 ? (
-                  <p className="text-sm text-gray-500">Drop "Describe" here to start your first vibe coding loop ✨</p>
-                ) : currentPhase >= 1 && currentPhase <= 3 ? (
-                  <div key={activeLoopStep} className="animate-fade-in space-y-3 w-full">
+                {currentPhase === 0 ? (
+                  <p className="text-sm text-gray-400 font-medium">Drop <span className="text-blue-400 font-bold">Describe</span> here to start your vibe coding loop ✨</p>
+                ) : (
+                  <div key={activeLoopStep} className="animate-fade-in space-y-4 w-full relative z-10">
                     {currentPhase >= 1 && (
-                      <div className={`flex items-start gap-2 text-left transition-opacity duration-300 ${currentPhase === 1 ? 'opacity-100' : 'opacity-60'}`}>
-                        <span className="text-blue-400 text-sm">💬</span>
-                        <p className="text-xs text-gray-300"><span className="text-blue-400 font-bold">You said:</span> {cycleData.describe}</p>
+                      <div className={`flex items-start gap-3 text-left transition-all duration-500 ${currentPhase === 1 ? 'opacity-100 translate-y-0' : 'opacity-70 scale-[0.98]'}`}>
+                        <span className="text-blue-400 text-base mt-0.5">💬</span>
+                        <p className="text-sm text-gray-300"><span className="text-blue-400 font-bold">You said:</span> <span className="font-mono text-xs bg-black/30 px-2 py-0.5 rounded text-blue-200">{cycleData.describe}</span></p>
                       </div>
                     )}
+
                     {currentPhase >= 2 && (
-                      <div className={`flex items-start gap-2 text-left transition-opacity duration-300 ${currentPhase === 2 ? 'opacity-100' : 'opacity-60'}`}>
-                        <span className="text-purple-400 text-sm">⚡</span>
-                        <p className="text-xs text-gray-300"><span className="text-purple-400 font-bold">AI generated:</span> {cycleData.generate}</p>
+                      <div className={`flex items-start gap-3 text-left transition-all duration-500 ${currentPhase === 2 ? 'opacity-100 translate-y-0' : 'opacity-70 scale-[0.98]'}`}>
+                        <span className="text-purple-400 text-base mt-0.5">⚡</span>
+                        <p className="text-sm text-gray-300"><span className="text-purple-400 font-bold">AI generated:</span> <span className="text-gray-400">{cycleData.generate}</span></p>
                       </div>
                     )}
+
                     {currentPhase >= 3 && (
-                      <div className="flex items-start gap-2 text-left">
-                        <span className="text-brand-primary text-sm">🔄</span>
-                        <p className="text-xs text-gray-300"><span className="text-brand-primary font-bold">You refined:</span> {cycleData.iterate}</p>
+                      <div className="flex items-start gap-3 text-left animate-fade-in">
+                        <span className="text-brand-primary text-base mt-0.5">🔄</span>
+                        <p className="text-sm text-gray-300"><span className="text-brand-primary font-bold">You refined:</span> <span className="font-mono text-xs bg-black/30 px-2 py-0.5 rounded text-orange-200">{cycleData.iterate}</span></p>
+                      </div>
+                    )}
+
+                    {currentPhase === 1 && (
+                      <div className="text-purple-400 text-xs font-bold animate-bounce mt-4 pt-2 border-t border-white/5">
+                        Now drag "Generate" into this box! ↓
+                      </div>
+                    )}
+
+                    {currentPhase === 2 && (
+                      <div className="text-brand-primary text-xs font-bold animate-bounce mt-4 pt-2 border-t border-white/5">
+                        Almost done! Drag "Iterate" to refine the app ↓
                       </div>
                     )}
                   </div>
-                ) : (
-                  <p className="text-sm text-gray-500">Ready for next cycle — drag Describe again! ↻</p>
                 )}
               </div>
 
-              {/* Cycle counter */}
-              {loopCycle > 0 && (
-                <div className="text-xs text-gray-500 flex items-center gap-2">
-                  <RefreshCw className="w-3 h-3 text-brand-primary" />
-                  Cycle {loopCycle + 1} — each loop makes your app better!
-                </div>
-              )}
+              {/* End of cycle message */}
+              <div className={`transition-all duration-500 h-10 flex items-center justify-center ${currentPhase === 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+                <button
+                  onClick={advancePhase}
+                  className="px-6 py-2 bg-brand-primary/20 hover:bg-brand-primary text-brand-primary hover:text-black rounded-full text-sm font-bold transition-all flex items-center gap-2"
+                >
+                  <RefreshCw className="w-4 h-4" /> Repeat the process endlessly
+                </button>
+              </div>
             </div>
           );
         })()}
