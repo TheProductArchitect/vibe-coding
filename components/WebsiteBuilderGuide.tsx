@@ -524,20 +524,31 @@ const LearningSection: React.FC = () => {
     }
   ];
 
-  const resources = [
-    { name: "Google AI Studio", url: "https://aistudio.google.com", desc: "Generate code with AI" },
+  const tools = [
+    { name: "Google AI Studio", url: "https://aistudio.google.com", desc: "Generate code with Gemini AI" },
     { name: "Lovable", url: "https://lovable.dev", desc: "Build apps in browser" },
     { name: "Cursor", url: "https://cursor.sh", desc: "AI-powered code editor" },
     { name: "Antigravity", url: "https://antigravity.google", desc: "Google's AI editor" },
-    { name: "GitHub", url: "https://github.com", desc: "Save & share code" },
+    { name: "GitHub", url: "https://github.com", desc: "Host & version code" },
     { name: "GitHub Pages", url: "https://pages.github.com", desc: "Free website hosting" },
     { name: "Vercel", url: "https://vercel.com", desc: "One-click deploys" },
-    { name: "React Docs", url: "https://react.dev/learn", desc: "Learn React basics" },
-    { name: "Vite Docs", url: "https://vitejs.dev/guide", desc: "Build tool reference" },
+    { name: "Supabase", url: "https://supabase.com", desc: "Backend & database" },
+  ];
+
+  const learningResources = [
+    { name: "Prompt Engineering Guide", url: "https://www.promptingguide.ai", desc: "Master AI prompting techniques" },
+    { name: "Andrej Karpathy on Vibe Coding", url: "https://x.com/karpathy/status/1886192184808149383", desc: "The tweet that coined 'vibe coding'" },
+    { name: "Lovable Docs", url: "https://docs.lovable.dev", desc: "Learn Lovable's AI builder" },
+    { name: "Cursor Docs", url: "https://docs.cursor.com", desc: "Cursor IDE tips & workflows" },
+    { name: "Google AI Studio Guide", url: "https://ai.google.dev/gemini-api/docs/ai-studio-quickstart", desc: "Get started with Gemini" },
+    { name: "Build with AI (Google)", url: "https://buildwith.google/ai", desc: "Google's AI building resources" },
+    { name: "Replit Agent Docs", url: "https://docs.replit.com/replitai/agent", desc: "AI-powered app builder" },
+    { name: "V0 by Vercel", url: "https://v0.dev", desc: "AI UI generation from prompts" },
+    { name: "Bolt.new", url: "https://bolt.new", desc: "AI-powered full-stack builder" },
   ];
 
   return (
-    <div className="mt-24 space-y-8">
+    <div id="resources-and-tools" className="mt-24 space-y-8">
       {/* Golden Rules */}
       <div className="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
@@ -547,7 +558,7 @@ const LearningSection: React.FC = () => {
             <BookOpen className="w-3 h-3" /> Quick Tips
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Golden Rules</h3>
-          <p className="text-gray-400 text-sm">Tap any rule to learn more.</p>
+          <p className="text-gray-300 text-sm">Tap any rule to learn more.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-3">
@@ -589,20 +600,20 @@ const LearningSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Quick Resources */}
+      {/* Tools */}
       <div className="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary via-yellow-500 to-orange-500"></div>
 
         <div className="animate-float-gentle-delayed text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4 border border-brand-primary/20">
-            <Link className="w-3 h-3" /> Resources
+            <Wrench className="w-3 h-3" /> Tools
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Essential Tools</h3>
           <p className="text-gray-400 text-sm">Bookmark these — you'll use them in every project.</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 md:gap-3">
-          {resources.map((res, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+          {tools.map((res, i) => (
             <a
               key={i}
               href={res.url}
@@ -613,6 +624,37 @@ const LearningSection: React.FC = () => {
               <div className="flex items-center justify-between gap-1">
                 <span className="text-xs md:text-sm font-bold text-white group-hover:text-brand-primary transition-colors truncate">{res.name}</span>
                 <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-brand-primary shrink-0 transition-colors" />
+              </div>
+              <span className="text-[10px] md:text-xs text-gray-400">{res.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Learning Resources */}
+      <div className="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500"></div>
+
+        <div className="animate-float-gentle-delayed text-center mb-8">
+          <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-400 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4 border border-blue-500/20">
+            <BookOpen className="w-3 h-3" /> Resources
+          </div>
+          <h3 className="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Learn & Grow</h3>
+          <p className="text-gray-400 text-sm">Explore vibe coding resources, tools, and the people shaping this movement.</p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+          {learningResources.map((res, i) => (
+            <a
+              key={i}
+              href={res.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#0a0a0a] border border-white/5 rounded-xl p-3 md:p-4 hover:border-blue-500/30 hover:bg-[#111] transition-all group flex flex-col gap-1"
+            >
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-xs md:text-sm font-bold text-white group-hover:text-blue-400 transition-colors truncate">{res.name}</span>
+                <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-blue-400 shrink-0 transition-colors" />
               </div>
               <span className="text-[10px] md:text-xs text-gray-400">{res.desc}</span>
             </a>
@@ -944,10 +986,10 @@ const WebsiteBuilderGuide: React.FC = () => {
         <h2 className="text-4xl md:text-6xl font-bold font-serif text-white mb-6">
           Build & <span className="text-brand-primary">Ship</span>
         </h2>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light mb-4">
+        <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light mb-4">
           Go from idea to live website. Pick a path that matches your comfort level — all roads lead to a real, deployed product.
         </p>
-        <p className="text-sm text-gray-400 max-w-lg mx-auto">
+        <p className="text-sm text-gray-300 max-w-lg mx-auto">
           Each path includes step-by-step instructions with copy-paste prompts, expected outputs, and best practices.
         </p>
       </motion.div>
@@ -956,7 +998,7 @@ const WebsiteBuilderGuide: React.FC = () => {
       <div className="mb-16 max-w-5xl mx-auto relative">
         <h3 className="text-xl font-serif text-white mb-2 text-center">Choose Your Path</h3>
         <div className="flex flex-col items-center justify-center mb-8">
-          <p className="text-sm text-gray-400 mb-3 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
+          <p className="text-sm text-gray-300 mb-3 text-center">From zero-effort to fully customizable. Pick what feels right.</p>
         </div>
 
         {/* Floating Cloud Popup */}
@@ -966,9 +1008,9 @@ const WebsiteBuilderGuide: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9, x: -20 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.9, x: 20 }}
-              className="absolute -right-12 top-24 z-20 hidden lg:flex"
+              className="absolute -right-64 -top-2 z-20 hidden xl:flex"
             >
-              <div className="relative bg-brand-primary text-black font-bold text-sm px-4 py-3 rounded-2xl shadow-[0_0_30px_rgba(255,194,14,0.3)] animate-float flex items-center gap-2 max-w-[200px]">
+              <div className="relative bg-brand-primary text-black font-bold text-sm px-4 py-3 rounded-2xl shadow-[0_0_30px_rgba(255,194,14,0.3)] animate-float flex items-center gap-2 max-w-[220px]">
                 {/* Cloud Tail */}
                 <div className="absolute top-1/2 -left-3 -translate-y-1/2 w-4 h-4 bg-brand-primary rotate-45 rounded-sm"></div>
                 <MousePointerClick className="w-5 h-5 shrink-0 animate-bounce-gentle" />
@@ -1052,7 +1094,7 @@ const WebsiteBuilderGuide: React.FC = () => {
             <h3 className="text-3xl md:text-4xl font-bold font-serif text-white mb-3">
               Step-by-Step Guide
             </h3>
-            <p className="text-gray-400 max-w-xl mx-auto">
+            <p className="text-gray-300 max-w-xl mx-auto">
               Follow this workflow from start to finish. Click any step to see details, expected outputs, and best practices.
             </p>
             {currentPath.link && (

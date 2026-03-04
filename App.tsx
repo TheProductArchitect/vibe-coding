@@ -22,7 +22,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (activeTab) {
       case AppState.NEW_TO_VIBE:
-        return <Curriculum />;
+        return <Curriculum onNavigateToBuild={() => setActiveTab(AppState.BUILD_WORKFLOW)} />;
       case AppState.WHAT_IS_WEB_APP:
         return <ToolsSection />;
       case AppState.BUILD_WORKFLOW:
@@ -59,7 +59,7 @@ const App: React.FC = () => {
               Turn your ideas into live web apps instantly. <span className="text-white font-medium">Zero coding required.</span>
             </p>
 
-            <p className="animate-float-gentle text-sm text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
+            <p className="animate-float-gentle text-sm text-gray-300 max-w-lg mx-auto mb-10 leading-relaxed">
               Master the art of prompting. Learn to build, deploy, and scale real software using advanced AI tools — entirely through plain English.
             </p>
 
@@ -79,6 +79,21 @@ const App: React.FC = () => {
                 Build My First App
               </button>
             </div>
+
+            <div className="animate-float-gentle mt-4">
+              <button
+                onClick={() => {
+                  setActiveTab(AppState.BUILD_WORKFLOW);
+                  setTimeout(() => {
+                    document.getElementById('resources-and-tools')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 500);
+                }}
+                className="px-6 py-3 bg-transparent border border-brand-primary/30 text-brand-primary font-bold rounded-xl hover:bg-brand-primary/10 transition-colors flex items-center gap-2 justify-center"
+              >
+                <BookOpen className="w-5 h-5" />
+                Resources & Tools
+              </button>
+            </div>
           </div>
         );
     }
@@ -95,7 +110,11 @@ const App: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
             <div
               className="flex items-center gap-4 cursor-pointer group"
+              role="button"
+              tabIndex={0}
+              aria-label="Go to home page"
               onClick={() => setActiveTab(AppState.HOME)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveTab(AppState.HOME); } }}
             >
               {/* Logo */}
               <div className="w-10 h-10 bg-brand-primary rounded-sm flex items-center justify-center shadow-lg transform group-hover:rotate-3 transition-transform">
@@ -105,7 +124,7 @@ const App: React.FC = () => {
                 <span className="font-bold text-white text-sm tracking-wide group-hover:text-brand-primary transition-colors uppercase">
                   Vibe Coding
                 </span>
-                <span className="text-xs text-gray-400 tracking-wider">Build with AI</span>
+                <span className="text-xs text-gray-300 tracking-wider">Build with AI</span>
               </div>
             </div>
 
@@ -142,6 +161,7 @@ const App: React.FC = () => {
         {/* Footer */}
         <footer
           className="border-t border-white/10 py-6 mt-12 bg-black/40 backdrop-blur-md cursor-pointer hover:bg-black/60 transition-colors"
+          role="contentinfo"
           onClick={(e) => {
             const event = new CustomEvent('scrambleStars', { detail: { x: e.clientX, y: e.clientY } });
             window.dispatchEvent(event);
@@ -150,9 +170,9 @@ const App: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-left pointer-events-none">
               <h2 className="text-white font-bold mb-2">Vibe Coding</h2>
-              <p className="text-gray-400 text-sm">Build real products with AI — no coding experience required.</p>
+              <p className="text-gray-300 text-sm">Build real products with AI — no coding experience required.</p>
             </div>
-            <div className="flex items-center gap-6 text-sm text-gray-400">
+            <div className="flex items-center gap-6 text-sm text-gray-300">
               <span>Copyright © 2026 Venu Gopinath. All rights reserved.</span>
             </div>
           </div>

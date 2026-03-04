@@ -34,7 +34,7 @@ const StarfieldBackground: React.FC = () => {
         };
 
         const initStars = () => {
-            const count = Math.floor((canvas.width * canvas.height) / 5000);
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 5000), 300);
             stars = [];
             for (let i = 0; i < count; i++) {
                 const x = Math.random() * canvas.width;
@@ -199,6 +199,7 @@ const StarfieldBackground: React.FC = () => {
     return (
         <canvas
             ref={canvasRef}
+            aria-hidden="true"
             className="fixed inset-0 z-0 pointer-events-none transform-gpu will-change-transform"
             style={{ background: 'transparent' }}
         />
