@@ -745,6 +745,7 @@ const DeploymentDemo: React.FC = () => {
             <button
               onClick={(e) => { e.stopPropagation(); prevStep(); }}
               className="p-2 rounded-lg hover:bg-white/10 text-white transition-colors border border-white/10"
+              aria-label="Previous Step"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>

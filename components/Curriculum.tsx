@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Cpu, Layers, Lightbulb, Zap, Rocket, CheckCircle2,
   ArrowRight, RefreshCw, Copy, Monitor, Download, Lock, MapPin,
@@ -7,6 +7,40 @@ import {
 import { enhanceUserPrompt } from '../services/huggingface';
 
 const STUDENT_SIGNUP_LINK = "https://one.google.com/u/3/ai-student?g1_landing_page=75&utm_source=gemini&utm_medium=web&utm_campaign=advmktgsite";
+
+const FocusSection: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsFocused(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '-20% 0px -20% 0px',
+      }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setIsFocused(true)}
+      className={`transition-all duration-700 ease-out ${
+        isFocused ? 'opacity-100 scale-100 filter-none' : 'opacity-30 scale-[0.98] blur-[2px]'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
 
 const WORKSHOP_STEPS = [
   { id: 0, title: "Navigation", icon: Compass },
@@ -239,10 +273,11 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
             </p>
 
             <div className="bg-brand-gray border border-white/10 p-6 rounded-xl mb-8 relative group focus-within:border-brand-primary transition-colors">
-              <label className="block text-brand-primary text-xs font-bold uppercase tracking-wide mb-3 flex items-center gap-2">
+              <label htmlFor="user-idea-input" className="block text-brand-primary text-xs font-bold uppercase tracking-wide mb-3 flex items-center gap-2">
                 <Zap className="w-3 h-3" /> Your Idea
               </label>
               <textarea
+                id="user-idea-input"
                 value={userIdea}
                 onChange={(e) => setUserIdea(e.target.value)}
                 placeholder="e.g., I want a personal portfolio website with a dark mode toggle and a contact form..."
@@ -312,6 +347,7 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
                   {generatedPrompt || "Generating optimized prompt..."}
                 </pre>
                 <button
+                  aria-label="Copy to Clipboard"
                   onClick={copyToClipboard}
                   className="absolute top-2 right-2 p-2 bg-white/10 rounded hover:bg-white/20 text-white transition-colors"
                   title="Copy to Clipboard"
@@ -355,14 +391,17 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 min-h-screen flex flex-col">
-      <div className="animate-float-gentle text-center mb-12">
-        <span className="text-brand-primary font-bold text-sm tracking-widest uppercase mb-3 block">I'm New to Vibe Coding</span>
-        <h2 className="text-4xl md:text-5xl font-serif text-white mb-2">Start Here</h2>
-        <p className="text-gray-300 text-sm max-w-lg mx-auto">Everything you need to understand vibe coding and build your first project.</p>
-      </div>
+      <FocusSection className="mb-12">
+        <div className="animate-float-gentle text-center">
+          <span className="text-brand-primary font-bold text-sm tracking-widest uppercase mb-3 block">I'm New to Vibe Coding</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-2">Start Here</h2>
+          <p className="text-gray-300 text-sm max-w-lg mx-auto">Everything you need to understand vibe coding and build your first project.</p>
+        </div>
+      </FocusSection>
 
       {/* What is Vibe Coding - Interactive Auto-Advancing Loop */}
-      <div className="mb-16 max-w-4xl mx-auto w-full">
+      <FocusSection className="w-full">
+        <div className="mb-16 max-w-4xl mx-auto w-full">
         <h3 className="text-2xl font-serif text-white mb-2 text-center">What is Vibe Coding?</h3>
         <p className="text-center text-sm text-gray-400 mb-8">
           {loopCycle === 0 ? 'Drag or click "Describe" to start — watch the magic unfold!' : 'Describe your changes to start another cycle ↻'}
@@ -537,9 +576,11 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
           </div>
         </div>
       </div>
+      </FocusSection>
 
-      {/* Workshop Steps Header with context */}
-      <div className="text-center mb-8">
+      <FocusSection className="flex flex-col w-full">
+        {/* Workshop Steps Header with context */}
+        <div className="text-center mb-8">
         <h3 className="text-2xl font-serif text-white mb-2">Your First Session</h3>
         <p className="text-gray-400 text-sm max-w-lg mx-auto">
           Now that you know the loop, let's put it into practice. Pick a tool, write a prompt, and launch your first app — all in under 10 minutes.
@@ -608,22 +649,25 @@ const Curriculum: React.FC<CurriculumProps> = ({ onNavigateToBuild }) => {
       <div className="flex-1 glass-panel p-6 md:p-12 rounded-3xl relative overflow-hidden mt-2 min-h-[500px]">
         {renderStepContent()}
       </div>
+      </FocusSection>
 
       {/* Connect to Build Page */}
       {onNavigateToBuild && (
-        <div className="mt-16 text-center bg-brand-primary/5 border border-brand-primary/20 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto relative overflow-hidden group">
-          <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <h3 className="text-3xl font-serif text-white mb-3 relative z-10">Ready to build your first app?</h3>
-          <p className="text-gray-400 mb-8 max-w-lg mx-auto relative z-10">
-            There are step-by-step instructions on the build page to get you started with any tool. Choose your path and launch today.
-          </p>
-          <button
-            onClick={onNavigateToBuild}
-            className="relative z-10 inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-black font-bold text-lg rounded-xl hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,194,14,0.3)]"
-          >
-            Start Building <Rocket className="w-5 h-5" />
-          </button>
-        </div>
+        <FocusSection className="w-full">
+          <div className="mt-16 text-center bg-brand-primary/5 border border-brand-primary/20 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto relative overflow-hidden group">
+            <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h3 className="text-3xl font-serif text-white mb-3 relative z-10">Ready to build your first app?</h3>
+            <p className="text-gray-400 mb-8 max-w-lg mx-auto relative z-10">
+              There are step-by-step instructions on the build page to get you started with any tool. Choose your path and launch today.
+            </p>
+            <button
+              onClick={onNavigateToBuild}
+              className="relative z-10 inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-black font-bold text-lg rounded-xl hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,194,14,0.3)]"
+            >
+              Start Building <Rocket className="w-5 h-5" />
+            </button>
+          </div>
+        </FocusSection>
       )}
     </div>
   );

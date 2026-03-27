@@ -1,9 +1,17 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { VibeResponse } from "../types";
 
+// The API key is injected by Vite's define plugin during build/dev
 const apiKey = process.env.API_KEY || '';
 
 let _ai: GoogleGenAI | null = null;
+
+/**
+ * Initializes and returns the GoogleGenAI instance.
+ * Implements a singleton pattern to avoid recreating the instance on every call.
+ * 
+ * @returns GoogleGenAI instance or null if the API key is missing.
+ */
 const getAI = () => {
   if (!_ai) {
     if (!apiKey) {
@@ -15,6 +23,10 @@ const getAI = () => {
   return _ai;
 };
 
+/**
+ * Schema definition to enforce structured JSON output from Gemini.
+ * This ensures the generation strictly matches our VibeResponse interface.
+ */
 const vibeSchema: Schema = {
   type: Type.OBJECT,
   properties: {
@@ -43,6 +55,13 @@ const vibeSchema: Schema = {
   required: ["colorPalette", "fontPairing", "layoutStyle", "reasoning", "uiElementName"],
 };
 
+/**
+ * Generates a full design system configuration (colors, fonts, etc.) based on a user's textual 'vibe' description.
+ * Utilizes Gemini 2.5 Flash for rapid structured JSON generation.
+ * 
+ * @param userVibe - The user's input string describing their desired style.
+ * @returns A promise that resolves to a VibeResponse object.
+ */
 export const generateVibeConfig = async (userVibe: string): Promise<VibeResponse> => {
   try {
     const ai = getAI();

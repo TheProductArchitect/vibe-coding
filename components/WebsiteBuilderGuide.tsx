@@ -878,6 +878,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
           <div className="flex items-center gap-1 shrink-0">
             {hasDetails && (
               <button
+                aria-label={showDetails ? "Hide Details" : "View Details"}
                 className={`p-1.5 rounded hover:bg-white/10 transition-colors ${showDetails ? 'text-brand-primary' : 'text-gray-400'}`}
                 title="View Details"
               >
@@ -885,6 +886,7 @@ const StepItemDisplay: React.FC<{ item: StepItem, id: string }> = ({ item, id })
               </button>
             )}
             <button
+              aria-label="Copy to Clipboard"
               onClick={(e) => { e.stopPropagation(); copyToClipboard(item.text); }}
               className="p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
               title="Copy"

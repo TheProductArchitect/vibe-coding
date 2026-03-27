@@ -47,11 +47,12 @@ const VibeLab: React.FC = () => {
         {/* Input Section */}
         <div className="glass-panel p-8 rounded-2xl flex flex-col justify-between min-h-[450px] border-t-4 border-t-cjbs-primary">
           <div>
-            <label className="block text-lg font-serif font-medium text-white mb-2">
+            <label htmlFor="vibe-prompt" className="block text-lg font-serif font-medium text-white mb-2">
               What are we building today?
             </label>
             <p className="text-xs text-gray-400 mb-4">Be expressive. Focus on the user's emotion and the business goal.</p>
             <textarea
+              id="vibe-prompt"
               className="w-full bg-cjbs-dark/50 border border-gray-700 rounded-xl p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-ai-purple focus:border-transparent outline-none transition-all resize-none h-40"
               placeholder="e.g., 'A meditation app for busy CEOs that feels like a quiet Japanese garden' or 'A high-energy crypto trading dashboard for Gen Z'"
               value={prompt}
