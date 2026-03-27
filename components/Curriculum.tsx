@@ -5,42 +5,10 @@ import {
   Code, ExternalLink, MessageSquare, Compass, Loader2, AlertCircle, Cloud
 } from 'lucide-react';
 import { enhanceUserPrompt } from '../services/huggingface';
+import { FocusSection } from './FocusSection';
 
 const STUDENT_SIGNUP_LINK = "https://one.google.com/u/3/ai-student?g1_landing_page=75&utm_source=gemini&utm_medium=web&utm_campaign=advmktgsite";
 
-const FocusSection: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsFocused(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '-20% 0px -20% 0px',
-      }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      onMouseEnter={() => setIsFocused(true)}
-      className={`transition-all duration-700 ease-out ${
-        isFocused ? 'opacity-100 scale-100 filter-none' : 'opacity-30 scale-[0.98] blur-[2px]'
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-};
 
 const WORKSHOP_STEPS = [
   { id: 0, title: "Navigation", icon: Compass },

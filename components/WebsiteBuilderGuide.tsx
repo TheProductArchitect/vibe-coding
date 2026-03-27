@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { FocusSection } from './FocusSection';
 import { Terminal, Globe, Rocket, Search, Code, CheckCircle, Copy, ChevronRight, ChevronLeft, GitBranch, Server, Zap, Layout, Play, ArrowDown, RefreshCw, MessageSquare, UserPlus, Key, Settings, Download, ExternalLink, MousePointerClick, Eye, Check, Power, BookOpen, Sparkles, Lightbulb, AlertCircle, FileText, Target, Wrench, Shield, TrendingUp, HelpCircle, Link } from 'lucide-react';
 import ScrollProgressLine from './ScrollProgressLine';
 
@@ -977,6 +978,7 @@ const WebsiteBuilderGuide: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 py-12 relative">
       {/* Galaxy Starfield */}
       {/* Page Intro */}
+      <FocusSection>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -995,8 +997,10 @@ const WebsiteBuilderGuide: React.FC = () => {
           Each path includes step-by-step instructions with copy-paste prompts, expected outputs, and best practices.
         </p>
       </motion.div>
+      </FocusSection>
 
       {/* Path Selector */}
+      <FocusSection>
       <div className="mb-16 max-w-5xl mx-auto relative">
         <h3 className="text-xl font-serif text-white mb-2 text-center">Choose Your Path</h3>
         <div className="flex flex-col items-center justify-center mb-8">
@@ -1061,6 +1065,7 @@ const WebsiteBuilderGuide: React.FC = () => {
           })}
         </div>
       </div>
+      </FocusSection>
 
       {/* Selected Path Workflow */}
       {selectedPath && currentPath && (
@@ -1116,7 +1121,8 @@ const WebsiteBuilderGuide: React.FC = () => {
             <ScrollProgressLine containerRef={containerRef} className="left-1/2 -translate-x-1/2" />
 
             {phases.map((phase, index) => (
-              <div key={index} className="mb-24 relative">
+              <FocusSection key={index}>
+              <div className="mb-24 relative">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -1164,6 +1170,7 @@ const WebsiteBuilderGuide: React.FC = () => {
                   ))}
                 </div>
               </div>
+              </FocusSection>
             ))}
           </div>
         </motion.div>

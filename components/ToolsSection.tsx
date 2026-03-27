@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { FocusSection } from './FocusSection';
 import {
   Play, ArrowUpRight, Cloud, Box,
   Layout, Database, Lock, CreditCard, Globe, Cpu, Network,
@@ -770,6 +771,7 @@ const ToolsSection: React.FC = () => {
     <div className="bg-transparent relative overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
 
+        <FocusSection>
         <div className="text-center mb-20 animate-fade-in animate-float-gentle">
           <div className="inline-block bg-white/10 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-6 border border-white/10">
             Software Fundamentals
@@ -781,8 +783,10 @@ const ToolsSection: React.FC = () => {
             You don't need to write code — but knowing the basics helps you build better with AI.
           </p>
         </div>
+        </FocusSection>
 
         {/* SECTION 1: ANATOMY OF AN APP (Frontend vs Backend) */}
+        <FocusSection>
         <div className="mb-32 relative">
           <div className="flex items-center gap-3 mb-10 justify-center md:justify-start">
             <div className="p-2 bg-brand-primary rounded text-black">
@@ -894,8 +898,10 @@ const ToolsSection: React.FC = () => {
             ]}
           />
         </div>
+        </FocusSection>
 
         {/* SECTION 2: LIVE ARCHITECTURE DEMO */}
+        <FocusSection>
         <div className="mb-32">
           <div className="flex items-center gap-3 mb-8 justify-center md:justify-start">
             <div className="p-2 bg-brand-primary rounded text-black">
@@ -971,9 +977,11 @@ const ToolsSection: React.FC = () => {
             ]}
           />
         </div>
+        </FocusSection>
 
         {/* SECTION 3: HOSTING (Deployment Ecosystem) */}
         {/* Formerly Section 4 */}
+        <FocusSection>
         <div className="mb-32">
           <div className="flex items-center gap-3 mb-8 justify-center md:justify-start">
             <div className="p-2 bg-brand-primary rounded text-black">
@@ -1051,6 +1059,7 @@ const ToolsSection: React.FC = () => {
           />
 
         </div>
+        </FocusSection>
 
       </div>
     </div>
